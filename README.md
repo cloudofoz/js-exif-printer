@@ -14,6 +14,10 @@ A small web tool to automatically read and draw on photos their technical inform
   For the online version: <a href="https://www.cloudofoz.com/exif-printer/">click here</a>
 </h2>
 
+<h3 align="center">
+  <img src="https://www.cloudofoz.com/exif-printer/screenshots/screen_01.jpg" align="right" style="margin-bottom:20px;"/>
+</h3>
+
 
 ### Main features
 * Responsive web design (desktop and mobile)
