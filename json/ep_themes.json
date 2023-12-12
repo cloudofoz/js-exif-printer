@@ -1,0 +1,98 @@
+{
+
+  "Dark":
+  {
+    "background": "rgba(0, 0, 0, 0.45)",
+    "text": "white",
+    "icon": "white",
+    "textFont": "'M PLUS 1 Code'",
+    "decorations": "rgba(0,0,0, 0.45)",
+    "drawIconBackground": true,
+    "borderWidth": 6.0,
+    "shadowBlur": 10.0,
+    "shadowColor": "rgba(0,0,0, 0.5)",
+    "blur": 0.0
+  },
+
+  "Light":
+  {
+    "background": "rgba(255, 255, 255, 0.6)",
+    "text": "black",
+    "icon": "white",
+    "textFont": "'M PLUS 1 Code'",
+    "decorations": "#1565c0",
+    "drawIconBackground": true,
+    "borderWidth": 4.0,
+    "shadowBlur": 6.0,
+    "shadowColor": "rgba(255, 255, 255 0.8)",
+    "blur": 0.0
+  },
+
+  "Lady Bug": {
+    "background": "#570A0A73",
+    "text": "white",
+    "icon": "white",
+    "textFont": "'M PLUS 1 Code'",
+    "decorations": "#00000082",
+    "drawIconBackground": true,
+    "borderWidth": 6.0,
+    "shadowBlur": 10.0,
+    "shadowColor": "rgba(0,0,0, 0.5)",
+    "blur": 0.0
+  },
+
+  "Blurry Shadow":
+  {
+    "background": "#000000CF",
+    "text": " #FFFFFF",
+    "icon": "#FFFFFF",
+    "textFont": "'M PLUS 1 Code'",
+    "decorations": "#00000073",
+    "drawIconBackground": true,
+    "borderWidth": 0.3,
+    "shadowBlur": 10.0,
+    "shadowColor": "#000000C2",
+    "blur": 23.8
+  },
+
+  "Banana": {
+    "background": "#FF860087",
+    "text": "#000000",
+    "icon": "white",
+    "textFont": "'M PLUS 1 Code'",
+    "decorations": "#4819198C",
+    "drawIconBackground": true,
+    "borderWidth": 2.5,
+    "shadowBlur": 0.0,
+    "shadowColor": "#763400CF",
+    "blur": 0.0
+  },
+
+  "COZ":
+  {
+    "background": "rgba(18, 18, 18, 0.7)",
+    "text": "#a9a9b3",
+    "textFont": "'M PLUS 1 Code'",
+    "icon": "rgba(126,189,63,1)",
+    "decorations": "rgba(102,153,51,0)",
+    "drawIconBackground": false,
+    "borderWidth": 3.0,
+    "shadowBlur": 4.0,
+    "shadowColor": "rgba(0,0,0, 0.5)",
+    "blur": 0.0
+  },
+
+  "Pinky": {
+    "background": "#7D318F78",
+    "text": "#FFFFFFE0",
+    "icon": "#FF89F98F",
+    "textFont": "'M PLUS 1 Code'",
+    "decorations": "#060009B8",
+    "drawIconBackground": true,
+    "borderWidth": 4.8,
+    "shadowBlur": 8.2,
+    "shadowColor": "#0000003B",
+    "blur": 0.0
+  }
+
+}

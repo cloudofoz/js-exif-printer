@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (C) Claudio Z. 2023 (www.cloudofoz.com)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<style type="text/css">
+	.stroke{fill:none;stroke:#a9a9b3;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<line class="stroke" x1="21" y1="20" x2="3.2" y2="11.9"/>
+<line class="stroke" x1="21" y1="3.9" x2="3.2" y2="12"/>
+<ellipse class="stroke" cx="15.8" cy="11.9" rx="2.5" ry="5"/>
+<line class="stroke" x1="3" y1="14.8" x2="3" y2="9.2"/>
+<!--line class="stroke" x1="15.8" y1="11.9" x2="3" y2="12"/-->
+</svg>

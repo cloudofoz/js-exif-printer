@@ -1,0 +1,97 @@
+{    
+    "model": {
+        "iconID": "photo_camera",
+        "iconType": "material_symbol",
+        "name": "Camera Model",
+        "desc": "Device used to take this picture.",
+        "tagID": "Model",
+        "tagType": "exif"
+    },
+
+    "shutterSpeed": {
+        "iconID": "timer",
+        "iconType": "material_symbol",
+        "name": "Shutter Speed",
+        "desc": "The length of time that the digital sensor inside the camera is exposed to light.",
+        "prefix": "1/",
+        "suffix": " s",
+        "tagID": "ExposureTime",
+        "tagType": "exif"
+
+    },
+
+    "_copyright": {
+        "iconID": "copyright",
+        "iconType": "material_symbol",
+        "name": "Copyright",
+        "desc": "Who owns the copyright of this image.",
+        "tagID": "Copyright",
+        "tagType": "exif"
+    },
+
+    "isoValue": {
+        "iconID": "icons/iso_icon.svg",
+        "iconType": "local_svg",
+        "name": "ISO Value",
+        "desc": "The sensitivity of the camera's image sensor to light.",
+        "tagID": "ISOSpeedRatings",
+        "tagType": "exif"
+    },
+
+    "focalLength": {
+        "iconID": "icons/fov_icon.svg",
+        "iconType": "local_svg",
+        "name": "FOV",
+        "desc": "Optical distance from the point where light rays converge to form a sharp image of an object to the digital sensor\r\n(angle of view / magnification).",
+        "suffix": " mm",
+        "tagID": "FocalLength",
+        "tagType": "exif"
+    },
+
+    "fNumber": {
+        "iconID": "camera",
+        "iconType": "material_symbol",
+        "name": "Aperture",
+        "desc": "Opening in a lens through which light passes to enter the camera.",
+        "prefix": "f/",
+        "tagID": "FNumber",
+        "tagType": "exif"
+    },
+
+    "title": {
+        "iconID": "title",
+        "iconType": "material_symbol",
+        "name": "Title",
+        "desc": "Some people like to title their photos.",
+        "tagID": "ImageDescription",
+        "tagType": "exif",
+        "prefix": "\"",
+        "suffix": "\""
+    },
+
+    "author": {
+        "iconID": "signature",
+        "iconType": "material_symbol",
+        "name": "Author",
+        "desc": "Who took care of this picture.",
+        "tagID": "Artist",
+        "tagType": "exif"
+    },
+
+    "size": {
+        "iconID": "straighten",
+        "iconType": "material_symbol",
+        "name": "Size",
+        "desc": "Image original (width) x (height) in pixels.",
+        "tagType": "custom"
+    },
+
+    "date": {
+        "iconID": "event",
+        "iconType": "material_symbol",
+        "name": "Date",
+        "desc": "When the picture was taken.",
+        "tagID": "DateTimeOriginal",
+        "tagType": "exif"
+    }
+}

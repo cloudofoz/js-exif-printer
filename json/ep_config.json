@@ -1,0 +1,39 @@
+{
+
+  "defaultTags": [
+    "title",
+    "model",
+    "focalLength",
+    "fNumber",
+    "shutterSpeed",
+    "isoValue"
+  ],
+
+  "examples": {
+
+    "images/photo_example_03.jpg": {
+      "theme": "Lady Bug",
+      "tags": ["focalLength", "fNumber", "isoValue", "shutterSpeed", "model"],
+      "offset": { "x" : 21.5, "y" : 416.7},
+      "scale": 0.82
+    },
+
+    "images/photo_example_02.jpg": {
+      "theme": "Banana",
+      "tags": ["focalLength","fNumber", "isoValue"],
+      "offset": { "x" : 7.8, "y" : 400},
+      "scale": 0.97,
+      "metrics": {
+        "lineSpacing": 11.5
+      }
+    },
+
+    "images/photo_example_01.jpg": {
+      "theme": "Pinky",
+      "tags": ["isoValue", "fNumber", "focalLength", "shutterSpeed", "model"],
+      "offset": { "x" : 13, "y" : 673.8},
+      "scale": 1.13
+    }
+  }
+
+}

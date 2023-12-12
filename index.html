@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="Claudio Z. (www.cloudofoz.com)" name="author">
+    <meta content="EXIF Printer is a small free and open source web tool aimed at amateurs and photography enthusiasts who want to share some technical information along with their images."
+          name="description">
+    <meta content="Photography, EXIF, IPTC, Camera Model, Focal Length, ISO, HTML, CSS, JavaScript" name="keywords">
+
+    <title>EXIF Printer 0.1</title>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import Google Symbols -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet"/>
+    <!--Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=M+PLUS+1+Code:wght@600&display=swap"
+          rel="stylesheet">
+
+    <!-- Compiled and minified Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+    <!-- App theme -->
+    <link href="css/ep_app_style.css" rel="stylesheet">
+    <link href="css/ep_thin_scrollbar.css" rel="stylesheet">
+    <link href="css/ep_modal_help.css" rel="stylesheet">
+
+    <!-- Color picker CSS-->
+    <!-- https://github.com/simonwep/pickr -->
+    <!-- Licensed under MIT license  -->
+    <link href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css" rel="stylesheet"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover" name="viewport"/>
+</head>
+
+<!----------------------------------------------------------------------------------------->
+
+<!-- Height fix for mobile                                                               -->
+<!-- Credit for the trick: https://css-tricks.com/the-trick-to-viewport-units-on-mobile/ -->
+<script>
+    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // We listen to the resize event
+    window.addEventListener('resize', () => {
+        // We execute the same script as before
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+</script>
+
+<!----------------------------------------------------------------------------------------->
+
+<body onload="onPageLoaded()">
+
+<!---------------------------------------->
+
+<nav>
+    <div class="nav-wrapper container">
+
+        <!---------------------------------------->
+
+        <div class="row" style="display: flex; height: 100%; width: 100%;">
+
+            <!---------------------------------------->
+
+            <ul class="col s4 center">
+                <li><a class="btn-floating waves-effect waves-light selected-button modal-trigger" href="#modalHelp"
+                       id="modalHelpTrigger">
+                    <i class="material-icons" style="font-size: xx-large; ">help</i>
+                </a></li>
+            </ul>
+
+            <!---------------------------------------->
+
+            <!-- Modal Structure -->
+            <div class="modal" id="modalHelp">
+                <div class="modal-content">
+                    <div>
+                        <div class="card">
+                            <div class="card-image">
+                                <img id="modalHelpImage">
+                                <!--span class="card-title">1) Load an image</span-->
+                            </div>
+                            <div class="card-content" id="modalHelpTip"></div>
+                            <div class="container modal-container">
+                                <div class="col s3 center-align">
+                                    <a class="btn-floating waves-effect waves-light btn-small scale-transition scale-out"
+                                       id="modalHelpPrevTip"
+                                       style="padding-left: 4px"><i class="material-icons">arrow_back_ios</i></a>
+                                </div>
+                                <div class="col s6"></div>
+                                <div class="col s3 center-align">
+                                    <a class="btn-floating waves-effect waves-light btn-small" id="modalHelpNextTip"><i
+                                            class="material-icons">arrow_forward_ios</i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---------------------------------------->
+
+            <div class="col s4" style="display: flex; padding: 0 0 0 0;">
+                <img class="valign-wrapper"
+                     src="icons/app_icon.svg"
+                     style=" display: block; margin-left: auto; margin-right: auto; max-height: 100%; max-width: 100%;">
+            </div>
+
+            <!---------------------------------------->
+
+            <ul class="col s4"> <!-- class="right hide-on-med-and-down"-->
+
+                <li class="right">
+                    <a class="btn-floating waves-effect waves-light btn-small"
+                       href="https://github.com/cloudofoz/js-exif-printer"
+                       rel="me noopener " style="margin: 0 5px 0 5px;" target="_blank" title="Github Repository">
+                        <i style="width: 60%; height: 60%; margin-top: 5px;">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                 stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </i>
+                    </a></li>
+
+                <li class="right"><a class="btn-floating waves-effect waves-light btn-small"
+                                     href="https://www.cloudofoz.com/"
+                                     style="margin: 0 5px 0 5px">
+                    <i class="material-icons">home</i>
+                </a></li>
+            </ul>
+
+            <!---------------------------------------->
+
+        </div>
+    </div>
+</nav>
+
+<!----------------------------------------------------------------------------------------->
+
+<header>
+
+    <div class="divider z-depth-5"></div>
+
+</header>
+
+<!----------------------------------------------------------------------------------------->
+
+<main class="valign-wrapper row app-content">
+
+    <div class="col s12 image-container"
+         style="background-repeat: repeat; background-image: url('images/bk_cbox.jpg');">
+        <!-- Canvas that will hold the image to be edited -->
+        <canvas class="image-viewer z-depth-5" height="0" id="canvas"></canvas>
+        <!-- currentTheme="padding: 0 0 0 0;" -->
+    </div>
+
+    <div class="divider col s12 z-depth-5"></div>
+
+    <div class="options-container col s12">
+
+        <!------------------------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------------------------->
+
+        <div class="container" id="menuMetrics" style="display: none; flex-direction: column;  padding-top: 5px;">
+
+            <div class="row" style="display: flex; height: 100%;">
+
+                <div class="col s6 pull-s3 offset-s6"
+                     style="display: flex; flex-direction: column; height: 88%; margin-top: 20px">
+
+                    <p class="range-field" style="margin: 0 0 0 0">
+                        <label style="margin: 0 0 0 0">Icon size: </label>
+                        <input id="themeEditorIconSize" max="128" min="16" step="0.1" target="iconSize" type="range"/>
+                    </p>
+
+                    <p class="range-field" style="margin: 0 0 0 0">
+                        <label style="margin: 0 0 0 0">Text size: </label>
+                        <input id="themeEditorTextSize" max="128" min="16" step="0.1" target="textSize" type="range"/>
+                    </p>
+
+                    <p class="range-field" style="margin: 0 0 0 0">
+                        <label style="margin: 0 0 0 0">Line spacing: </label>
+                        <input id="themeEditorLineSpacing" max="50" min="0" step="0.1" target="lineSpacing"
+                               type="range"/>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!------------------------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------------------------->
+
+        <div class="container" id="menuStyle" style="display: none; flex-direction: column;  padding-top: 5px;">
+
+            <div>
+                <div class="row>" style="margin-bottom: 5px;">
+                    <label class="hide-on-small-only" for="themeChooser"
+                           style="font-size: small; height: 2em !important;">Overlay Color Theme:</label>
+                    <select class="browser-default" id="themeChooser" onchange="onThemeChanged()">
+                    </select>
+                </div>
+
+                <div class="row" style="display: flex; overflow-y:auto;">
+
+                    <div class="col s6">
+
+                        <div class="row">
+
+                            <span class="col s8">Background:</span>
+                            <div class="col s4">
+                                <div class="theme-editor-background" target="background">></div>
+                            </div>
+
+                            <span class="col s8">Text:</span>
+                            <div class="col s4">
+                                <div class="theme-editor-text" target="text"></div>
+                            </div>
+
+                            <span class="col s8">Icons:</span>
+                            <div class="col s4">
+                                <div class="theme-editor-icons" target="icon"></div>
+                            </div>
+
+                            <span class="col s8">Decorations:</span>
+                            <div class="col s4">
+                                <div class="theme-editor-decorations" target="decorations"></div>
+                            </div>
+
+                            <span class="col s8">Shadow:</span>
+                            <div class="col s4">
+                                <div class="theme-editor-shadow" target="shadowColor"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col s6">
+
+                        <div class="row" style="margin: 0 0 0 0">
+                            <p class="range-field" style="margin: 0 0 0 0">
+                                <label style="margin: 0 0 0 0">Border width: </label>
+                                <input id="themeEditorBorderWidth" max="15" min="0" step="0.1" target="borderWidth"
+                                       type="range"/>
+                            </p>
+                            <p class="range-field" style="margin: 0 0 0 0">
+                                <label style="margin: 0 0 0 0">Blur: </label>
+                                <input id="themeEditorBlur" max="48" min="0" step="0.1" target="blur" type="range"/>
+                            </p>
+                            <p class="range-field" style="margin: 0 0 0 0">
+                                <label style="margin: 0 0 0 0">Shadow blur: </label>
+                                <input id="themeEditorShadowBlur" max="48" min="0" step="0.1" target="shadowBlur"
+                                       type="range"/>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <!------------------------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------------------------->
+
+        <div class="" id="menuTags" style="display: flex; flex-direction: column;  padding-top: 5px;">
+
+           <span class="hide-on-small-only row center-align" style="margin: 0 0 10px 0; padding: 0 0 0 0;">
+               Please select the tags you want to display:
+           </span>
+
+            <div class="row">
+
+                <div class="col s7 m6">
+
+                    <div class="" id="selectableTagContainer">
+
+                        <template id="tSelectableTagIcon">
+                            <div class="col s4 selectable-tag" onclick="onTagSelection(this)">
+                                <img class="selectable-tag-icon" height="42px" width="42px"/>
+                            </div>
+                        </template>
+
+                        <template id="tSelectableTagSymbol">
+                            <div class="col s4 selectable-tag" onclick="onTagSelection(this)">
+                                <i class="selectable-tag-icon material-symbols-outlined"></i>
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+                <div class="col s5 m6"
+                     style="display:flex; flex-direction: column ; margin-right: 0; padding-right: 4%;">
+
+                    <div class="material-symbols-outlined center-align" hidden id="focusedTagSymbol"></div>
+
+                    <img class="" hidden id="focusedTagIcon" width="50px"/>
+
+                    <span class="description-text">
+                            <b id="focusedTagName"></b>
+                            <i id="focusedTagDesc"></i>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <!------------------------------------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------------------------------------->
+
+
+    </div>
+
+    <!----------------------------------------------------------------------------------------->
+
+    <div class="footer-container col s12">
+        <div class="center-align" style="width: 100%; margin-bottom: 5px">
+
+            <a class="btn-floating waves-effect waves-light menu-button selected-button"
+               onclick="onMenuButtonClick(this);"
+               target="menuTags">
+                <i class="material-symbols-outlined">format_list_bulleted</i>
+            </a>
+            <a class="btn-floating waves-effect waves-light menu-button" onclick="onMenuButtonClick(this);"
+               target="menuStyle">
+                <i class="material-symbols-outlined">palette</i>
+            </a>
+            <a class="btn-floating waves-effect waves-light menu-button" onclick="onMenuButtonClick(this);"
+               target="menuMetrics">
+                <i class="material-symbols-outlined">space_dashboard</i>
+            </a>
+            <!--div></div-->
+            <a style="margin-right: 15px"></a>
+            <a class="btn-floating waves-effect waves-light" onclick="saveImage()"> <!--disabled="disabled"-->
+                <i class="material-symbols-outlined">download</i>
+            </a>
+            <a class="btn-floating waves-effect waves-light" onclick="uploadImageElement.click()">
+                <i class="material-symbols-outlined">publish</i>
+            </a>
+            <!--a class="btn-floating waves-effect waves-light" onclick="devSaveSettings()">
+                <i class="material-symbols-outlined">book</i>
+            </a-->
+        </div>
+        <div class="footer-copyright" style="font-size: x-small !important">
+            © 2023 Claudio Z.
+        </div>
+    </div>
+
+</main>
+
+<!----------------------------------------------------------------------------------------->
+
+<!-- Element used to download the canvas image from code -->
+<a hidden id="downloadImageElement"></a>
+
+<!-- Hidden image that will be used for holding the source image -->
+<img alt="Image Source" crossorigin="anonymous" hidden id="sourceImage" src=""/>
+
+<!-- File Selector for uploading the image -->
+<input accept="image/*" hidden id="uploadImageElement" type="file">
+
+<!----------------------------------------------------------------------------------------->
+
+
+<!-- Fast Color Parsing and Manipulation -->
+<!-- https://github.com/bgrins/TinyColor -->
+<!-- Licensed under MIT license  -->
+<script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.6.0/cjs/tinycolor.min.js"></script>
+
+<!--Materialize javascript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- exif-js library -->
+<!-- https://github.com/exif-js/exif-js -->
+<!-- Licensed under MIT license  -->
+<script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
+<!-- Color picker JS-->
+<!-- https://github.com/simonwep/pickr -->
+<!-- Licensed under MIT license  -->
+<script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+
+<!-- Handles images exif tags -->
+<script src="js/ep_tag_manager.js"></script>
+
+<!-- Handles mouse / touch input inside a control -->
+<script src="js/ep_touch_handler.js"></script>
+
+<!-- Read image exif data -->
+<script src="js/ep_tag_reader.js"></script>
+
+<!-- Render exif data as an overlay  -->
+<script src="js/ep_overlay_renderer.js"></script>
+
+<!-- Overlay theme editor -->
+<script src="js/ep_theme_editor.js"></script>
+
+<!-- App modal helper -->
+<script src="js/ep_modal_helper.js"></script>
+
+<!-- Main app logic -->
+<script src="js/ep_main.js"></script>
+
+</body>
+
+
+</html>

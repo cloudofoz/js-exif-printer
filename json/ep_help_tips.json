@@ -1,0 +1,51 @@
+{
+  "start": {
+    "image": "images/help/start.jpg",
+    "tip": "<b style=\"color: #ff8646 !important; \">EXIF Printer</b> is a small <b style=\"color: #ff8646 !important; \">free</b> and <b style=\"color: #ff8646 !important; \">open source</b> web tool aimed at amateurs and <b>photography</b> enthusiasts who want to share some technical information along with their images.<br>From <b>camera model</b> or <b>focal length</b> to <b>authors</b> and <b>titles</b>, usually this data is written inside your images.<br> <br><b style=\"color: #ff8646 !important; \">EXIF Printer</b> allows you to pretty-print it as an overlay.",
+    "next": "loadImage",
+    "prev": null
+
+  },
+
+  "loadImage": {
+    "image": "images/help/help_00.jpg",
+    "tip": "<b>(1)</b> <b>Click</b> this <b>button</b> to <b>load an image</b> from your hard drive.<br><br>All work is done <b>within your browser</b> and no data will be uploaded to the server.<br><br><b style=\"color: #ff8646 !important; \">Privacy guaranteed!</b>",
+    "next": "adjustOverlay",
+    "prev": "start"
+  },
+
+  "adjustOverlay": {
+    "image": "images/help/help_01.jpg",
+    "tip": "<b>(2) </b><b>Move</b> and <b>resize</b> the overlay as needed.<br><br>To <b>move</b> it, just <b>drag</b> a <b>finger</b> on the image or the <b>mouse</b> while holding down the <b>left button</b>.<br><br>You can <b>resize</b> it by <b>pinching</b> with <b>2-fingers</b> or simply <b>rolling</b> the middle <b>mouse wheel</b> over the image.",
+    "next": "tagSelect",
+    "prev": "loadImage"
+  },
+
+  "tagSelect": {
+    "image": "images/help/help_02.jpg",
+    "tip": "<b style=\"color: #ff8646 !important; \">(3)</b> <b>Click</b> and <b>select</b> the <b>tags</b> you want to <b>display</b><br>(<b >more</b> tags coming in future updates!).<br><br>If an <b>icon</b> is <b style=\"color: #ba2424 !important; \">red</b> it means there is <b style=\"color: #ba2424 !important; \">no such data</b> in your image.<br><br>You'll see a brief <b>description</b> of the tag when you <b>click</b> on it.",
+    "next": "changeStyle",
+    "prev": "adjustOverlay"
+  },
+
+  "changeStyle": {
+    "image": "images/help/help_03.jpg",
+    "tip": "<b style=\"color: #ff8646 !important; \">(4)</b> Choose a <b>predefined style</b> from the list or <b>create your own</b>.<br><br><b>Clicking</b> on the <b>color boxes</b> will open a <b style=\"color: #ff8646 !important; \">color picker</b>!",
+    "next": "adjustMetrics",
+    "prev": "tagSelect"
+  },
+
+  "adjustMetrics": {
+    "image": "images/help/help_04.jpg",
+    "tip": "<b style=\"color: #ff8646 !important; \">(5)</b> (Optional) Here you can <b>edit</b> the <b>metrics</b>.<br><br>Adjust <b>line spacing</b>, <b>text</b> and <b>icon size</b><br>(<b>more</b> options coming in future updates!)",
+    "next": "saveResult",
+    "prev": "changeStyle"
+  },
+
+  "saveResult": {
+    "image": "images/help/help_05.jpg",
+    "tip": "<b>(6)</b> <b>Click</b> on this <b>button</b> to <b>save</b> your work to your hard drive.<br><br><b style=\"color: #ff8646 !important;\">Let me know if you liked EXIF printer, see you soon!</b>",
+    "next": null,
+    "prev": "adjustMetrics"
+  }
+}
