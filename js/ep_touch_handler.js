@@ -164,10 +164,28 @@ class TouchHandler {
         this.#scrollSensitivity = Math.max(0.00001, Math.min(1, s));
     }
 
+    setZoomRange(min, max) {
+        console.assert(min < max, "min >= max");
+        this.#minZoom = min;
+        this.#maxZoom = max;
+    }
+
+    // Used to reset the internal params as they were in the beginning
+    reset() {
+        this.#offset = {x: 0, y: 0};
+        this.#dragStart = {x: 0, y: 0};
+        this.#zoomFactor = 1.0;
+        this.#isDragging = false;
+        this.#startPinchDistance = null;
+    }
+
+    //-------------------------------------------------------
+    // PRIVATE METHODS
+
     // Gets the relevant location from a mouse or single touch event
     static #getEventLocation(e) {
         // Ratio between the resized element and the real dimensions
-        // This allows to drag correctly at any desktop resolution
+        // This allows to drag correctly at any resolution
         const ratio = {x: e.this.#el.width / e.this.#el.offsetWidth, y: e.this.#el.height / e.this.#el.offsetHeight};
         if (e.touches && e.touches.length === 1) {
             return {x: e.touches[0].clientX * ratio.x, y: e.touches[0].clientY * ratio.y};
@@ -181,9 +199,6 @@ class TouchHandler {
         e.this.#dragStart.x = TouchHandler.#getEventLocation(e).x - e.this.#offset.x;
         e.this.#dragStart.y = TouchHandler.#getEventLocation(e).y - e.this.#offset.y;
     }
-
-    //-------------------------------------------------------
-    // PRIVATE METHODS
 
     static #onPointerUp(e) {
         e.this.#isDragging = false;
@@ -238,18 +253,4 @@ class TouchHandler {
         }
     }
 
-    setZoomRange(min, max) {
-        console.assert(min < max, "min >= max");
-        this.#minZoom = min;
-        this.#maxZoom = max;
-    }
-
-    // Used to reset the internal params as they were in the beginning
-    reset() {
-        this.#offset = {x: 0, y: 0};
-        this.#dragStart = {x: 0, y: 0};
-        this.#zoomFactor = 1.0;
-        this.#isDragging = false;
-        this.#startPinchDistance = null;
-    }
 }

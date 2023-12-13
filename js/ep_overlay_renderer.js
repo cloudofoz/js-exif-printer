@@ -158,6 +158,41 @@ class ImageTagRenderer {
         }
     }
 
+    // Calculate the real size of the final overlay
+    calculateOverlaySize(tagContent) {
+
+        if(!tagContent) return;
+
+        const selectedTags = document.epTagManager.selectedTags;
+
+        const boundingBox = {w:0, h:0};
+
+        const ctx = this.#ctx;
+
+        // Set the font
+        ctx.font = `${Metrics.textSize}px ${this.#currentTheme.textFont}`;
+
+        for(const tagName of selectedTags) {
+
+            const value = tagContent[tagName];
+
+            if (!value) continue;
+
+            // Calculate the text metrics
+            const textMetrics = ctx.measureText(value);
+
+            boundingBox.w = Math.max(boundingBox.w, textMetrics.width);
+            boundingBox.h = Math.max(boundingBox.h, textMetrics.fontBoundingBoxAscent + textMetrics.fontBoundingBoxDescent);
+        }
+
+        boundingBox.h = Math.max(boundingBox.h, Metrics.iconSize * SQRT_2 + Metrics.iconBackgroundMargin);
+        boundingBox.w += boundingBox.h + Metrics.textMargin + Metrics.textSize / 2;
+
+        boundingBox.h = boundingBox.h * selectedTags.length + Metrics.lineSpacing * (selectedTags.length - 1);
+
+        return boundingBox;
+    }
+
     //-------------------------------------------------------
     // PRIVATE METHODS
 

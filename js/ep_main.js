@@ -189,9 +189,10 @@ function onImageLoaded() {
     // Reset the scale / offset values for the new image
     canvas.epInputHandler.reset();
 
-    // Adjust the zoom of the overlay
+    // Adjust the zoom of the overlay and the offset
     canvas.epInputHandler.zoomFactor = canvas.height * 0.001;
     canvas.epInputHandler.offset = {x: 20.0, y: 40.0};
+    canvas.epInputHandler.setZoomRange(canvas.height * 0.00045,canvas.height * 0.003);
 }
 
 // Called when the button to upload an image has been clicked
@@ -229,14 +230,39 @@ function canvasDrawImage() {
 // Draws the overlay on the canvas
 function canvasDrawOverlay() {
 
-    // Overlay upper-left corner position (x,y)
-    const offset = canvas.epInputHandler.offset;
+    const tagsContent = sourceImage.epTagReader.tags;
+
     // Scale factor
     const scale = canvas.epInputHandler.zoomFactor;
+
+    // Overlay upper-left corner position (x,y)
+    const offset = canvas.epInputHandler.offset;
+
+    // Calculate the effective overlay size
+    const overlaySize = canvas.epTagRenderer.calculateOverlaySize(tagsContent)
+    overlaySize.w *=scale;
+    overlaySize.h *=scale;
+
+    // Check the boundaries
+    offset.x = Math.min(canvas.width - overlaySize.w, offset.x);
+    offset.y = Math.min(canvas.height - overlaySize.h, offset.y);
+    offset.x = Math.max(0, offset.x);
+    offset.y = Math.max(0, offset.y);
+
+    // Update the offset according to the boundaries
+    canvas.epInputHandler.offset = offset;
+
+    // Debug Mode: show the current bounding box
+    /*context.beginPath();
+    context.rect(offset.x, offset.y, overlaySize.w, overlaySize.h);
+    context.closePath();
+    context.fillStyle = '#FF0000';
+    context.fill(); */
+
     // Overlay center (x,y)
     const center = {
-        x: offset.x /*+ sourceImage.epOverlayCurSize.w / 2*/,
-        y: offset.y /*+ sourceImage.epOverlayCurSize.h / 2*/
+        x: offset.x /* + overlaySize.w / 2 */,
+        y: offset.y /* + overlaySize.h / 2 */
     };
 
     context.save();
@@ -247,10 +273,7 @@ function canvasDrawOverlay() {
     context.translate(-center.x, -center.y);
 
     // Rendering the overlay (exif and metadata tags)
-    // 'epOverlayCurSize' contains the size of the overlay rect
-    const tags = sourceImage.epTagReader.tags;
-    /*sourceImage.epOverlayCurSize = */
-    canvas.epTagRenderer.renderTags(tags, offset.x, offset.y);
+    canvas.epTagRenderer.renderTags(tagsContent, offset.x, offset.y);
 
     context.restore();
 }
