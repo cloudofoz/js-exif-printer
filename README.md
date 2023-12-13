@@ -27,6 +27,7 @@ A small web tool to automatically read and draw on photos their technical inform
 * Tag Icons: Support for any <a href="https://fonts.google.com/icons">Google Material Symbol</a>
 * Tag Icons: Basic support for custom SVG icons (with a parser to convert from SVG to a Path2D compatible with the renderer)
 * Support for custom tags
+* 100% front-end: data is never uploaded to the server
 
 <br/>
 
