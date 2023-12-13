@@ -116,7 +116,7 @@ function onPageLoaded(event) {
                     canvas.epTagRenderer.initialize()
                         .then(() => {
 
-                            // Fill the color currentTheme list with the available styles
+                            // Fill the color theme list with the available styles
                             for (const themeName in canvas.epTagRenderer.themes) {
                                 const opt = document.createElement('option');
                                 opt.value = themeName;

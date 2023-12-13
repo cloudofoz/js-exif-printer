@@ -83,10 +83,10 @@ class ImageTagRenderer {
     //-------------------------------------------------------
     // PRIVATE VARIABLES
 
-    // Available color currentTheme themes
+    // Available color themes
     #themes;
 
-    // Current currentTheme
+    // Current theme
     #currentTheme;
 
     // Canvas context
@@ -197,7 +197,7 @@ class ImageTagRenderer {
             // Grab the element
             const it = elements.item(k);
 
-            // Check the element currentTheme class
+            // Check the element style name (it has to be named 'fill' or 'stroke')
             switch (it.getAttribute("class")) {
 
                 case 'fill':
@@ -218,7 +218,7 @@ class ImageTagRenderer {
             switch (it.nodeName) {
                 case 'style':
                     // Skip it:
-                    // currentTheme class name has to be 'fill' or 'stroke'. All the other details are managed by Themes.
+                    // style has to be named 'fill' or 'stroke'. All the other details are managed by Themes.
                     break;
 
                 case 'path':
@@ -277,9 +277,9 @@ class ImageTagRenderer {
             let list =  doc.getElementsByTagName('svg');
             if(!list) continue;
 
-            // Create a stroke path (used for elements with currentTheme 'stroke' and by default)
+            // Create a stroke path (used for elements with style 'stroke' and by default)
             let strokePath = new Path2D();
-            // Create a fill path (used for elements with currentTheme 'fill'
+            // Create a fill path (used for elements with style 'fill'
             let fillPath = new Path2D();
 
             // Process recursively the svg root node
@@ -313,7 +313,7 @@ class ImageTagRenderer {
 
         //-----------------------------------------------------
 
-        // Set up the default icon currentTheme
+        // Set up the default icon style
         ctx.fillStyle = this.#currentTheme.icon;
         ctx.strokeStyle = this.#currentTheme.icon;
         ctx.lineWidth = 2.0;
