@@ -144,7 +144,7 @@ class TagReader {
             // If the prefix ends with '1/' automatically
             // apply the calculation
             if (tagDesc.prefix.endsWith('1/')) {
-                tagValue = 1 / Number(tagValue);
+                tagValue = Math.round(1 / Number(tagValue));
             }
         }
 
