@@ -68,9 +68,6 @@ class TagManager {
     // Holds the relevant information about the supported tags to read and use
     #tagsData;
 
-    // Instance of the config json object (used to know which tags are displayed by default)
-    #config;
-
     // Array of tag (keys) that will be displayed along with the image
     #selectedTags = [];
 
