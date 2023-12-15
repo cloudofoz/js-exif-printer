@@ -31,8 +31,37 @@ A small web tool to automatically read and draw on photos their technical inform
 
 <br/>
 
-### Getting started
+### How to
+#### Use the tool
 Instructions on how to use it are provided automatically when you open the page.
+#### Add a new tag
+Adding a new tag is very simple. In this example I'll show you how to enable the display of the photo `copyright` tag.
+Simply add this entry to `ep_tags_data.json`:
+```
+"copyright": {
+    "iconID": "copyright",
+    "iconType": "material_symbol",
+    "name": "Copyright",
+    "desc": "Who owns the copyright of this image.",
+    "tagID": "Copyright",
+    "tagType": "exif"
+}
+```
+* `iconID`: It can be the code of a **Google Material Symbol**, like in this case, or a path to a **SVG**.
+* `iconType`: It can be `material_symbol` if `iconID` is the code of a **Material Symbol** or `local_svg` if `iconID` is the path of an **SVG**. An SVG icon has to be centered in a box of `(0, 0, 24, 24)` pixels and can have only a combination of ***two*** styles named `fillStyle` and `strokeStyle`. **EXIF Printer** will fill any path called `fillStyle` and draw the outline of any path called `strokeStyle`. Real colouring and styling are completely managed by **EXIF Printer**.
+* `name`: It's the name displayed when you click on the icon
+* `desc`: It'a brief description of the tag, it will displayed alongsie `name`.
+* `tagID`: It's the **key** used by `exif-js` to store the EXIF/IPTC tag. It can be a **custom unique id** for custom tags.
+* `tagType`: It can be `exif` if `tagID` is an **EXIF** tag id. Other possible values are: `iptc` or `custom`. Custom tags have to be manually implemented inside the code.
+### Test the project locally
+**Python** can be used to start a server in the project path:
+* Navigate to the **EXIF Printer** directory.
+* Execute the command to start the server:
+  
+**Python 2** — `python -m SimpleHTTPServer 8000`
+
+**Python 3** — `python -m http.server 8000`
+* Open a web browser at `http://localhost:8000/`.
 
 <br/>
 
